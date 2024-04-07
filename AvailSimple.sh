@@ -104,7 +104,7 @@ StartLimitIntervalSec=0
 User=root
 ExecStart=nohup bash -c 'curl -sL1 avail.sh | bash -s -- --network goldberg --identity /root/availd/identity.toml' > output.log 2>&1 &
 Restart=always
-RestartSec=180
+RestartSec=60
 [Install]
 WantedBy=multi-user.target
 EOF
