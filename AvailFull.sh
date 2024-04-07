@@ -8,7 +8,7 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 # 脚本保存路径
-SCRIPT_PATH="$HOME/AvailSimple.sh"
+SCRIPT_PATH="$HOME/AvailFull.sh"
 
 # 自动设置快捷键的功能
 function check_and_set_alias() {
