@@ -8,7 +8,7 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 # 脚本保存路径
-SCRIPT_PATH="$HOME/Avail-one.sh"
+SCRIPT_PATH="$HOME/AvailSimple.sh"
 
 # 自动设置快捷键的功能
 function check_and_set_alias() {
@@ -76,23 +76,23 @@ install_dependencies "${dependencies[@]}"
 
 
 # 设置安装目录和发布 URL
-INSTALL_DIR="${HOME}/avail-light"
-RELEASE_URL="https://github.com/availproject/avail-light/releases/download/v1.7.10/avail-light-linux-amd64.tar.gz"
-
-# 创建安装目录并进入
-mkdir -p "$INSTALL_DIR"
-cd "$INSTALL_DIR" || exit
+#INSTALL_DIR="${HOME}/avail-light"
+#RELEASE_URL="https://github.com/availproject/avail-light/releases/download/v1.7.10/avail-light-linux-amd64.tar.gz"
+#
+## 创建安装目录并进入
+#mkdir -p "$INSTALL_DIR"
+#cd "$INSTALL_DIR" || exit
 
 # 下载并解压发布包
-wget "$RELEASE_URL"
-tar -xvzf avail-light-linux-amd64.tar.gz
-cp avail-light-linux-amd64 avail-light
+#wget "$RELEASE_URL"
+#tar -xvzf avail-light-linux-amd64.tar.gz
+#cp avail-light-linux-amd64 avail-light
 
 # 创建identity.toml文件
-read -p "请输入您的12位钱包助记词：" SECRET_SEED_PHRASE
-cat > identity.toml <<EOF
-avail_secret_seed_phrase = "$SECRET_SEED_PHRASE"
-EOF
+#read -p "请输入您的12位钱包助记词：" SECRET_SEED_PHRASE
+#cat > identity.toml <<EOF
+#avail_secret_seed_phrase = "$SECRET_SEED_PHRASE"
+#EOF
 
 # 配置 systemd 服务文件
 tee /etc/systemd/system/availd.service > /dev/null << EOF
@@ -102,7 +102,7 @@ After=network.target
 StartLimitIntervalSec=0
 [Service]
 User=root
-ExecStart=/root/avail-light/avail-light --network goldberg --identity /root/avail-light/identity.toml
+ExecStart=nohup bash -c 'curl -sL1 avail.sh | bash -s -- --network goldberg --identity /root/availd/identity.toml' > output.log 2>&1 &
 Restart=always
 RestartSec=120
 [Install]
